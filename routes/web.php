@@ -8,3 +8,4 @@ Route::get('/', [PostController::class, 'index'])->name('home');
 route::get('posts/{post:slug}', [PostController::class, 'show']);
 
 route::get('register', [RegisterController::class, 'create']);
+route::post('register', [RegisterController::class, 'store']);
