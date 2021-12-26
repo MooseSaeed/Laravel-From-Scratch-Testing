@@ -18,15 +18,17 @@ class sessionsController extends Controller
 
         // atttempt to authenticate and log the user in
 
-        if (auth()->attempt($attributes)) {
-            session()->regenerate();
+        if (!auth()->attempt($attributes)) {
 
-            return redirect('/')->with('success', 'Welcome Back!');
+            throw ValidationException::withMessages([
+                'email' => 'Your provided credentials bla bla'
+            ]);
         }
 
-        //auth failed
 
-        throw ValidationException::withMessages(['email' => 'Your provided credentials bla bla']);
+        session()->regenerate();
+
+        return redirect('/')->with('success', 'Welcome Back!');
     }
 
     public function create()
