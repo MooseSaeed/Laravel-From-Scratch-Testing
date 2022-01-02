@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Post extends Model
 {
@@ -36,6 +37,11 @@ class Post extends Model
             $query
                 ->whereHas('author', fn ($query) => $query->where('username', $author))
         );
+    }
+
+    public function setSlugAttribute($title)
+    {
+        $this->attributes['slug'] = Str::slug($title);
     }
 
     public function author()
