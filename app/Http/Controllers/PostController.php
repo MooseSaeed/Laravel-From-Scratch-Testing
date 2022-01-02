@@ -36,6 +36,7 @@ class PostController extends Controller
 
         $attributes = request()->validate([
             'title' => ['required', Rule::unique('posts', 'title')],
+            'thumbnail' => 'required|image',
             'slug' => '',
             'excerpt' => 'required',
             'body' => 'required',
@@ -44,6 +45,7 @@ class PostController extends Controller
 
         $attributes['user_id'] = auth()->id();
         $attributes['slug'] = $attributes['title'];
+        $attributes['thumbnail'] = request()->file('thumbnail')->store('thumbnails');
 
         Post::create($attributes);
 
