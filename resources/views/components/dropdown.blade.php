@@ -1,6 +1,6 @@
 @props(['trigger'])
 
-<div x-data="{ open: false }">
+<div x-data="{ open: false }" class="relative">
 
     {{-- Trigger --}}
 
