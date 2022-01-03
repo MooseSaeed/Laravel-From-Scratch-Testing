@@ -39,11 +39,6 @@ class Post extends Model
         );
     }
 
-    public function setSlugAttribute($title)
-    {
-        $this->attributes['slug'] = Str::slug($title);
-    }
-
     public function author()
     {
         return $this->belongsTo(User::class, 'user_id');
